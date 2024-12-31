@@ -12,6 +12,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -66,5 +67,16 @@ public class Selenium4Tests {
     public void testElementScreenshot() throws WebDriverException, IOException {
     	WebElement loginButton = driver.findElement(By.xpath("//button"));
     	FileUtils.copyFile(loginButton.getScreenshotAs(OutputType.FILE), new File("Login Button Screenshot.png"));
+    }
+    
+    @Test
+    public void testNewWindow() {
+    	System.out.println("The current window title : "+driver.getTitle());
+    	driver.switchTo().newWindow(WindowType.TAB);
+    	driver.get("https://www.saucedemo.com/v1/");
+    	System.out.println("In new Tab: "+driver.getTitle());
+    	driver.switchTo().newWindow(WindowType.WINDOW);
+    	driver.get("https://www.google.com");
+    	System.out.println("In new Window: "+driver.getTitle());
     }
 }
