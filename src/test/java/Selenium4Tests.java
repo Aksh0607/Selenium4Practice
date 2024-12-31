@@ -79,4 +79,13 @@ public class Selenium4Tests {
     	driver.get("https://www.google.com");
     	System.out.println("In new Window: "+driver.getTitle());
     }
+    
+    @Test
+    public void testObjectLocation() {
+    	WebElement loginButton = driver.findElement(By.xpath("//button"));
+    	System.out.println("X: "+ loginButton.getRect().getX());
+    	System.out.println("Y: "+ loginButton.getRect().getY());
+    	System.out.println("Width: "+ loginButton.getRect().getWidth());
+    	System.out.println("Height: "+ loginButton.getRect().getHeight());
+    }
 }
