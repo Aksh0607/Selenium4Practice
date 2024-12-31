@@ -2,10 +2,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.locators.RelativeLocator;
@@ -55,5 +60,11 @@ public class Selenium4Tests {
         // Use 'near' to locate an element close to the "Login" button
         WebElement nearLoginButton = driver.findElement(RelativeLocator.with(By.tagName("button")).near(passwordField, 100));
         System.out.println("Element near Login Button: " + nearLoginButton.getText());
+    }
+    
+    @Test
+    public void testElementScreenshot() throws WebDriverException, IOException {
+    	WebElement loginButton = driver.findElement(By.xpath("//button"));
+    	FileUtils.copyFile(loginButton.getScreenshotAs(OutputType.FILE), new File("Login Button Screenshot.png"));
     }
 }
